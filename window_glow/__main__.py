@@ -89,7 +89,7 @@ def main():
                 action = result[0]
                 if action == "show":
                     _, _hwnd, x, y, w, h = result
-                    overlay.show(x, y, w, h)
+                    overlay.show(x, y, w, h, _hwnd)
                     current_rect = (x, y, w, h)
                     fading_out = False
                     anim.show()
@@ -99,7 +99,7 @@ def main():
                     stationary_frames = 0
                 elif action == "move":
                     _, _hwnd, x, y, w, h = result
-                    overlay.show(x, y, w, h)
+                    overlay.show(x, y, w, h, _hwnd)
                     current_rect = (x, y, w, h)
                     fading_out = False
                     overlay.reposition(border)
