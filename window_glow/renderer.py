@@ -114,8 +114,8 @@ def generate_glow_bitmap(width, height, border, start_hue, end_hue, alpha_multip
     darken_lut = bytearray(lut_size)
     for d in range(lut_size):
         t = d / border_f
-        alpha_lut[d] = max(0, min(255, int(255.0 * math.cos(t * math.pi * 0.48) * alpha_multiplier)))
-        darken_lut[d] = max(51, int(255.0 * math.cos(t * math.pi * 0.48)))
+        alpha_lut[d] = max(0, min(255, int(255.0 * math.cos(t * math.pi * 0.42) * alpha_multiplier)))
+        darken_lut[d] = max(51, int(255.0 * math.cos(t * math.pi * 0.42)))
 
     color_lut = _COLOR_LUT
 
