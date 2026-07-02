@@ -1,0 +1,30 @@
+{
+    "border_width": 15,
+    "color": {
+        "start_hue": 180,
+        "end_hue": 270
+    },
+    "animation": {
+        "enabled": false,
+        "speed": 0.8,
+        "intensity": 0.3,
+        "fade_duration_ms": 200
+    },
+    "poll_interval_ms": 30,
+    "hotkey": {
+        "enabled": true,
+        "modifiers": "Alt",
+        "key": "B"
+    },
+    "excluded_classes": [
+        "Progman",
+        "WorkerW",
+        "Shell_TrayWnd",
+        "Windows.UI.Core.CoreWindow",
+        "ApplicationFrameWindow",
+        "MultitaskingViewFrame",
+        "TaskSwitcherWnd",
+        "ImmersiveLauncher",
+        "MSCTFIME UI"
+    ]
+}
