@@ -33,6 +33,7 @@ class OverlayWindow:
         self._y = 0
         self._w = 0
         self._h = 0
+        self._target_hwnd = None
         self._hotkey_callback = None
 
     def create(self):
@@ -56,7 +57,6 @@ class OverlayWindow:
         ex_style = (
             utils.WS_EX_LAYERED
             | utils.WS_EX_TRANSPARENT
-            | utils.WS_EX_TOPMOST
             | utils.WS_EX_TOOLWINDOW
             | utils.WS_EX_NOACTIVATE
         )
@@ -96,8 +96,9 @@ class OverlayWindow:
         self._tw = 0
         self._th = 0
 
-    def show(self, x, y, w, h):
+    def show(self, x, y, w, h, target_hwnd=None):
         self._x, self._y, self._w, self._h = x, y, w, h
+        self._target_hwnd = target_hwnd
         self._visible = True
 
     def hide(self):
@@ -184,10 +185,10 @@ class OverlayWindow:
 
         ox = self._x - border
         oy = self._y - border
+        after = self._target_hwnd or utils.HWND_TOPMOST
 
-        # Position & size the window first
         utils.user32.SetWindowPos(
-            self._hwnd, utils.HWND_TOPMOST,
+            self._hwnd, after,
             ox, oy, tw, th,
             utils.SWP_NOACTIVATE | utils.SWP_SHOWWINDOW,
         )
