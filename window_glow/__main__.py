@@ -26,7 +26,7 @@ def main():
 
     current_rect = None
     fading_out = False
-    last_render_time = 0.0
+    last_multiplier = 0.0
     enabled = True
     running = True
 
@@ -93,7 +93,7 @@ def main():
                     current_rect = (x, y, w, h)
                     fading_out = False
                     anim.show()
-                    last_render_time = 0.0
+                    last_multiplier = -1.0
                     move_streak = 0
                     dragging = False
                     stationary_frames = 0
@@ -118,14 +118,12 @@ def main():
                     if stationary_frames > RESUME_DELAY:
                         dragging = False
                         stationary_frames = 0
-                        last_render_time = 0.0
+                        last_multiplier = -1.0
 
             multiplier = anim.tick()
-            now = time.perf_counter()
-            render_interval = 0.04
-            time_to_render = (now - last_render_time) > render_interval
+            changed = abs(multiplier - last_multiplier) > 0.003
 
-            need_render = current_rect and multiplier > 0.001 and time_to_render
+            need_render = current_rect and multiplier > 0.001 and changed
             if dragging:
                 need_render = False
 
@@ -135,7 +133,7 @@ def main():
                     w, h, border, start_hue, end_hue, multiplier,
                 )
                 overlay.update_frame(border, buf, tw, th)
-                last_render_time = now
+                last_multiplier = multiplier
 
             if fading_out and multiplier <= 0.001:
                 overlay.hide()
